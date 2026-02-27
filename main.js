@@ -70,7 +70,7 @@ async function loadDashboard() {
         card.classList.add("active");
 
         card.querySelector(".status").textContent = "active";
-        button.textContent = "Comprovited";
+        button.textContent = "check";
         button.disabled = true;
       });
 
@@ -81,7 +81,7 @@ async function loadDashboard() {
     console.error("Error: ", error)
   }
   finally {    
-    console.log("Proceso finalizado");
+    console.log("Process completed");
   }
 }
 
