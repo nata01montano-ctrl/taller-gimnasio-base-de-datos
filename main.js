@@ -3,6 +3,8 @@ function getAthletes() {
   return new Promise((resolve, reject) => {
     console.log("Searching athletes...");
     setTimeout(() => {
+        const success = true; 
+
       const athletes = [
         { id: 1, user: "jUAn pErez", status: "inactive", points: 45 },
         { id: 2, user: "mArIa gArCiA", status: "active", points: 88 },
@@ -10,16 +12,20 @@ function getAthletes() {
         { id: 4, user: "lUciA fErNAnDeZ", status: "active", points: 95 },
         { id: 5, user: "pAbLo mArTiN", status: "inactive", points: 30 }
       ];
-      resolve(athletes);
-      
-    }, 1200);reject("Error al cargar los atletas");
+    if (success) {
+        resolve(athletes);
+    } else {
+
+        reject("404 Error");
+    }
+    }, 1200);
   });
   
 }
 
 async function loadDashboard() {
   const userDate = document.getElementById("athletes-container");
-  console.log("Cargando atletas...");
+  console.log("Loading ...");
 
   try {
     const data = await getAthletes();
