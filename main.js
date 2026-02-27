@@ -10,30 +10,33 @@ function getAthletes() {
         { id: 4, user: "lUciA fErNAnDeZ", status: "active", points: 95 },
         { id: 5, user: "pAbLo mArTiN", status: "inactive", points: 30 }
       ];
-      reject("Error al cargar los atletas");
-    }, 1200);
+      resolve(athletes);
+      
+    }, 1200);reject("Error al cargar los atletas");
   });
   
 }
 
 async function loadDashboard() {
-  const user = document.getElementById("athletes-container");
+  const userDate = document.getElementById("athletes-container");
   console.log("Cargando atletas...");
 
   try {
     const data = await getAthletes();
 
     const cards = data.map(athlete => {
-      const formattedName = athlete.user.toUpperCase();
-
-      const level = athlete.points > 50 ? "Elite" : "Amateur";
-
-      return {
+    let level;
+    if (athlete.points > 50) {
+        level = "Elite";
+    } else {
+        level = "Amateur";
+    }
+    return {
         ...athlete,
-        user: formattedName,
+        user: athlete.user.toUpperCase(),
         level: level
-      };
-    });
+    };
+});     
 
     console.log (" ... ");
 
@@ -65,7 +68,7 @@ async function loadDashboard() {
         button.disabled = true;
       });
 
-      user.appendChild(card);
+      userDate.appendChild(card);
     });
 
   } catch (error) {
